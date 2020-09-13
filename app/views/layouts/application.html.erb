@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-9"><h1>Bookers</h1></div>
+          <!-- ログイン済みならばtrueが、ログインしていなければfalseが返されます -->
+          <% if user_signed_in? %>
+            <div class="col-xs-3">
+              <table>
+                <td><span class="glyphicon glyphicon-apple" aria-hidden="true"></span><%= link_to ' Home', user_path(current_user.id) %></td>
+                <td><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span><%= link_to 'Users', users_path %></td>
+                <td><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span><%= link_to 'Books', books_path %></td>
+                <td><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span><%= link_to "logout", destroy_user_session_path, method: :delete %></td>
+              </table>
+            </div>
+          <% else %>
+          <div class="col-xs-3">
+            <table>
+              <td><span class="glyphicon glyphicon-apple" aria-hidden="true"></span><%= link_to 'Home', root_path %></td>
+              <td><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span><%= link_to 'About', home_about_path %></td>
+              <td><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span><%= link_to 'Sign up', new_user_registration_path %></td>
+              <td><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span><%= link_to 'login', new_user_session_path %></td>
+            </table>
+          </div>
+          <% end%>
+        </div>
+        <p id="notice"><%=  notice %></p>
+        <!-- routesのrootにした部分を表示 -->
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
