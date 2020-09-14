@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2</title>
+    <title>Bookers</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,11 +9,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <div class="container">
+<!--     <div class="container">
+      <span>Bookers2 test2</span>
       <div class="row">
-        <div class="col-xs-9"><h1>Bookers</h1></div>
-          <!-- ログイン済みならばtrueが、ログインしていなければfalseが返されます -->
+        <h1>test3</h1>
+<header>        <div class="col-xs-9"></div>
+        <h1>test4</h1>
+          ログイン済みならばtrueが、ログインしていなければfalseが返されます
           <% if user_signed_in? %>
             <div class="col-xs-3">
               <table>
@@ -33,11 +35,38 @@
             </table>
           </div>
           <% end%>
-        </div>
-        <p id="notice"><%=  notice %></p>
-        <!-- routesのrootにした部分を表示 -->
-        <%= yield %>
-      </div>
-    </div>
+        </div> </header>
+        <p id="notice"><%=  notice %></p> -->
+
+  <body>
+      <header class="navbar navbar-fixed-top navbar-inverse">
+        <body>
+          <div class="container">
+              <div class="row">
+                  <span class="col-xs-3 logo">Bookers</span>
+                      <div class="col-xs-9 icon-logo">
+                        <% if user_signed_in? %>
+                            <div class="navbar-right">
+                              <span class="glyphicon glyphicon-home text-wh" aria-hidden="true"></span><%= link_to ' Home', user_path(current_user.id), class:"text-wh "%>
+                              <span class="glyphicon glyphicon-user text-wh" aria-hidden="true"></span><%= link_to ' Users', users_path, class:"text-wh" %>
+                              <span class="glyphicon glyphicon-book text-wh" aria-hidden="true"></span><%= link_to ' Books', books_path, class:"text-wh" %>
+                              <span class="glyphicon glyphicon-log-out text-wh" aria-hidden="true"></span></span><%= link_to " logout", destroy_user_session_path, method: :delete, class:"text-wh" %>
+                            </div>
+                        <% else %>
+                            <div class="navbar-right">
+                              <span class="glyphicon glyphicon-home text-wh" aria-hidden="true"></span><%= link_to '  Home', root_path, class:"text-wh" %>
+                              <span class="glyphicon glyphicon-link text-wh" aria-hidden="true"></span><%= link_to '  About', home_about_path, class:"text-wh" %>
+                              <span class="glyphicon glyphicon-new-window text-wh" aria-hidden="true"></span><%= link_to ' Sign up', new_user_registration_path, class:"text-wh" %>
+                              <span class="glyphicon glyphicon-log-in text-wh" aria-hidden="true"></span><%= link_to ' login', new_user_session_path, class:"text-wh" %>
+                            </div>
+                        <% end%>
+                      </div>
+              </div>
+            </div>
+      </header>
+            <!-- routesのrootにした部分を表示 -->
+            <%= yield %>
+          </div>
+          <div class="container"><footer>CopyRight Infratop.inc</footer></div>
   </body>
 </html>

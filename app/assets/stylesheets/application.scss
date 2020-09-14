@@ -21,7 +21,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.clearfix::before {
+/*.clearfix::before {
    content: "";
    display: block;
    clear: both;
@@ -29,7 +29,7 @@
 header {
 	background-color: yellow;
 }
-/*headerの中のp
+headerの中のp
 header p {
 	padding-right: 30px;
 	float: right;
@@ -45,3 +45,23 @@ header p {
 .box1,.box2 {
 	float: left;
 }*/
+.logo {
+	font-size: 20px;
+	color: #FFF;
+}
+.icon-logo {
+	font-size: 15px;
+	padding-top: 10px;
+}
+footer {
+	float: right;
+}
+.text-wh {
+	color: #9d9d9d;
+}
+.box {
+	padding-top: 50px;
+}
+.test {
+	margin-top: 100px;
+}

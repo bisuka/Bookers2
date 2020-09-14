@@ -1,59 +1,75 @@
 <body>
-	<div class="col-xs-3">
-		<div class="box1">
-			<section class="Userinfo">
-				<h3>User info</h3>
-				<%= attachment_image_tag @user,:profile_image,size:'100x100',formt: 'jpeg', fallback: "no_image.jpg", size: '100x100'  %>
-				<p>name <%= @user.name %></p>
-				<p>introduction <%=  current_user.introduction %></p>
-				<!-- idを取得し、/user/:id/editコントローラーに飛ぶ -->
-				<span class="glyphicon glyphicon-cog" aria-hidden="true"><%= link_to "option", edit_user_path(current_user.id) %></span>
-			</section>
-			<section class="Newbook">
-				<h3>New book</h3>
-				<!-- url formを表示させる場所　Postメソッドを実行してしまう -->
-				<!-- @bookだけだと勝手にcreateに送信してくれる　Postメソッド -->
-				<%= form_for(@book) do |book|%>
-					<p>Title</p>
-					<%= book.text_field :title %>
-					<p>Opinion</p>
-					<%= book.text_field :body %>
-					<%= book.submit "Create Book" %>
-				<% end %>
-			</section>
+	<div class="container box">
+		<div class="col-xs-3">
+			<div class="box1">
+				<section class="Userinfo">
+					<h2>User info</h2>
+					<%= attachment_image_tag @user,:profile_image,size:'100x100',formt: 'jpeg', fallback: "no_image.jpg", size: '100x100'  %>
+					<table class="table">
+						<tr>
+							<td>name </td>
+							<td><%=  current_user.name %></td>
+						</tr>
+						<tr>
+							<td>introduction</td>
+							<td><%=  current_user.introduction%></td>
+						</tr>
+					</table>
+					<div class="row">
+						<!-- type="button"でボタン生成　class="btn-block" 横幅いっぱいボタン -->
+						<%= link_to "", edit_user_path(current_user.id), class:"col-xs-12 btn btn-default glyphicon glyphicon-cog "%>
+					</div>
+				</section>
+				<section class="Newbook">
+					<h3>New book</h3>
+	<!-- 				 url formを表示させる場所　Postメソッドを実行してしまう
+					 @bookだけだと勝手にcreateに送信してくれる　Postメソッド -->
+					<div class="row">
+						<%= form_for(@book) do |book|%>
+							<p>Title</p>
+							<%= book.text_field :title, class: "col-xs-12" %>
+							<p>Opinion</p>
+							<%= book.text_area :body, class: "col-xs-12" %>
+								<!-- <%=%>内にclassを利用する場合　class:で<>内で利用するときはclass=を使う -->
+								<%= book.submit "Create Book", class: "col-xs-12 btn-primary" %>
+								<!-- <button name="button" type="submit", class="col-xs-12" >Create Book</button> -->
+						<% end %>
+					</div>
+				</section>
+			</div>
 		</div>
-	</div>
-	<div class="col-xs-9">
-		<table class="box2 table table-striped">
-			<caption></caption>
-			<thead>
-				<tr>
-					<h3>Users</h3>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>image</td>
-					<td>name</td>
-					<td></td>
-				</tr>
-			</tbody>
-			<tbody>
-				<% @users.each do |user| %>
-				<tr>
-					<!-- user_pathの引数でなぜuserを指定できるか -->
-					<!-- @usersはuserモデルの全部を参照しているからuserを引数にしたらどれを取り出したらいいかわからなくない？という認識 -->
-					<!-- each文はuserモデルのid:1を参照し、下のコード実行。id:2を参照し下のコード実行のように一つづつ行われる-->
-					<!-- そのためuserで指定した場合１つづつidが引数として渡され、画像リンクが生成される。 -->
-					<!-- 画像リンクを選別したいときは？（女性ユーザーのみなど）そういった場合はコントローラーで行う -->
+		<div class="col-xs-9">
+			<table class="box2 table">
+				<caption></caption>
+				<thead>
+					<tr>
+						<h3>Users</h3>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>image</td>
+						<td>name</td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<% @users.each do |user| %>
+					<tr>
+						<!-- user_pathの引数でなぜuserを指定できるか -->
+						<!-- @usersはuserモデルの全部を参照しているからuserを引数にしたらどれを取り出したらいいかわからなくない？という認識 -->
+						<!-- each文はuserモデルのid:1を参照し、下のコード実行。id:2を参照し下のコード実行のように一つづつ行われる-->
+						<!-- そのためuserで指定した場合１つづつidが引数として渡され、画像リンクが生成される。 -->
+						<!-- 画像リンクを選別したいときは？（女性ユーザーのみなど）そういった場合はコントローラーで行う -->
 
-					 <!-- fallback: "no_image.jpg"  -->
-					<td><%= attachment_image_tag user, :profile_image,size:'100x100',formt: 'jpeg', fallback: "no_image.jpg", size: '50x50' %></td>
-					<td><%= user.name %></td>
-					<td><%= link_to 'Show', user_path(user.id) %></td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
+						 <!-- fallback: "no_image.jpg"  -->
+						<td><%= attachment_image_tag user, :profile_image,size:'100x100',formt: 'jpeg', fallback: "no_image.jpg", size: '50x50' %></td>
+						<td><%= user.name %></td>
+						<td><%= link_to 'Show', user_path(user.id) %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
