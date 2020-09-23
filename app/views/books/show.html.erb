@@ -52,6 +52,7 @@
 
 								<%= link_to @book_id.user.name, user_path(@book_id.user.id) %><br>
 
+
 								<!-- コメント表示 -->
 								<% @book_comments.each do |book_comment| %>
 							    	<%=link_to attachment_image_tag(@current_user, :profile_image,size:'50x50',fallback: "no_image.jpg"), user_path(@book_id.user.id) %><%= book_comment.comment %>
@@ -79,12 +80,24 @@
 							</td>
 							<td><%= @book_id.title %></td>
 							<td><%= @book_id.body %></td>
+							<td>
+								<!-- bookモデルにあるfavorited_by?メソッドにカレントユーザーを渡す -->
+								<% if @book_id.favorited_by?(current_user) %>
+								    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+								    <%= @book_id.favorites.count %> いいね
+								<% else %>
+								    <i class="fa fa-heart-o" aria-hidden="true"></i>
+								    <%= @book_id.favorites.count %> いいね
+								<% end %>
+							</td>
+							<td><p>コメント数:<%= @book_comments.count %></p></td>
+
+
 							<% if @user == current_user %>
 								<td><%= link_to "Edit" , edit_book_path(@book_id) %></td>
 								<td><%= link_to "Destroy", book_path(@book_id), method: :delete  %></td>
 							<% end %>
 						</tr>
-
 
 						<!-- 本の詳細ページへ行く時全てのデータが表示されてしまっていた失敗例 -->
 						<!-- 必要な情報は一つの<Book id: x, title: "x", body: "x", user_id: x>とuser infoに表示されているその本の投稿者のuserテーブル

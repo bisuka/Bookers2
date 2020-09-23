@@ -5,7 +5,12 @@ class FavoritesController < ApplicationController
 
     book = Book.find(params[:book_id])
 
-    favorite = current_user.favorites.new(book_id: book.id)
+    # キー参照参照して、newの時にカラムに変わる。
+    favorite = current_user.favorites.new({ book_id: book.id })
+
+    # newで段階でbook_idの名前のキーが作成されている。
+    favorite = current_user.favorites.new
+    favorite.book_id = book.id
 
     favorite.save
 
