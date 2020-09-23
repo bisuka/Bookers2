@@ -29,6 +29,10 @@ class BooksController < ApplicationController
         #<Book id: 38, title: "aaaaa", body: "aaaaa", user_id: 7 ここから.モデル名とすることで
         #１：Nの１のテーブル全てを取り出せる。
         # #<User id: 7, email: "a@p", introduction: "aaa", profile_image_id: nil, created_at: "2020-09-09 22:50:21", updated_at: "2020-09-11 20:26:38", name: "aaa">
+
+        @book_comment = BookComment.new
+        @book_comments = BookComment.all
+
         @user = @book_id.user
     end
 

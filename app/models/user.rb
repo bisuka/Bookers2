@@ -5,6 +5,9 @@ class User < ApplicationRecord
 
   # bookモデルNと関連付け
   has_many :books, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
+
   # refileを使えるようにする記述
   attachment :profile_image
 
