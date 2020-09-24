@@ -65,7 +65,24 @@
 						 <!-- fallback: "no_image.jpg"  -->
 						<td><%= attachment_image_tag user, :profile_image,size:'100x100',formt: 'jpeg', fallback: "no_image.jpg", size: '50x50' %></td>
 						<td><%= user.name %></td>
-						<td><%= link_to 'Show', user_path(user.id) %></td>
+					    <!-- フォロー機能 -->
+
+					    <td><%= "フォロー数: #{user.follower.count}" %></td>
+					    <td><%= "フォロワー数: #{user.followed.count}" %></td>
+
+					    <!-- user_signed_in?	ユーザーがサインイン済かどうかを判定する -->
+					    <% if user_signed_in? %>
+						    <td>
+<!-- 						      <%= "id: #{user.id} email: #{user.email}" %> -->
+
+						      <% if current_user.following?(user) %>
+						        <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+						      <% else %>
+						        <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+						      <% end %>
+						    </td>
+					    <% end %>
+					    <td><%= link_to 'Show', user_path(user.id) %></td>
 					</tr>
 					<% end %>
 				</tbody>

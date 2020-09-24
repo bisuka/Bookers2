@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'book_comments/create'
-  get 'book_comments/destroy'
+  get 'relationships/create'
+  get 'relationships/destroy'
   # get 'home/about'
   devise_for :users
   root 'books#top'
   get 'home/about' => 'home#about'
+  post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする
+  get  'follow/:id' => 'relationships#follows'
+  post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー外す
+  get  'unfollow/:id' => 'relationships#unfollows'
 
   resources :users, only: [:index, :show, :edit, :update]
 

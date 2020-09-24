@@ -91,6 +91,9 @@
 							  <% end %>
 							<% end %>
 						</td>
+
+						<!-- bookからbook_commentsモデルを参照してカウント -->
+						<td>コメント数: <%= book.book_comments.count %></td>
 					</tr>
 					<% end %>
 				</tbody>

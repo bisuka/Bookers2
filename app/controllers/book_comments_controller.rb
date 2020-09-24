@@ -1,8 +1,12 @@
 class BookCommentsController < ApplicationController
 	def create
 
+		# /books/:book_id/book_comments
 	    book = Book.find(params[:book_id])
+
+	    # {comment: nil}
 	    comment = current_user.book_comments.new(book_comment_params)
+	    # 関連付け
 	    comment.book_id = book.id
 	    comment.save
 	    redirect_to book_path(book)

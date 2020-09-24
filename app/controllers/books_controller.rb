@@ -31,7 +31,8 @@ class BooksController < ApplicationController
         # #<User id: 7, email: "a@p", introduction: "aaa", profile_image_id: nil, created_at: "2020-09-09 22:50:21", updated_at: "2020-09-11 20:26:38", name: "aaa">
 
         @book_comment = BookComment.new
-        @book_comments = BookComment.all
+        # book_commentsはモデルを参照している。1:Nなのでsがつく
+        @book_comments = @book_id.book_comments
 
         @user = @book_id.user
     end
